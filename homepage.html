@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SATPrep | Homepage</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000428, #004e92);
+      margin: 0;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #60a5fa;
+    }
+
+    nav a, #logoutBtn {
+      margin: 0 10px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    nav a:hover, #logoutBtn:hover {
+      background: #2563eb;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 50px;
+      animation: fadeIn 2s ease;
+    }
+
+    .hero h2 {
+      font-size: 2.6rem;
+      color: #93c5fd;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 15px auto;
+      color: #ddd;
+      font-size: 1.1rem;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 20px 80px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: 16px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 25px #2563eb;
+    }
+
+    .card h3 {
+      color: #60a5fa;
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; text-align: center; }
+      .cards { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <header>
+    <h1>SATPrep</h1>
+    <nav>
+      <a href="profile.html">Profile</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to SATPrep 🎓</h2>
+    <p>Sharpen your Reading, Writing, and Math skills with smart lessons, beautiful design, and progress tracking. Learn better, faster, and with confidence.</p>
+  </section>
+
+  <div class="cards">
+    <div class="card">
+      <h3>📘 Reading & Writing</h3>
+      <p>Master grammar, comprehension, and evidence-based reading skills.</p>
+      <a href="reading.html" style="color:#93c5fd; text-decoration:none;">Go to Section →</a>
+    </div>
+    <div class="card">
+      <h3>🔢 Math Practice</h3>
+      <p>Build your confidence through practice problems & detailed examples.</p>
+      <a href="math.html" style="color:#93c5fd; text-decoration:none;">Go to Section →</a>
+    </div>
+    <div class="card">
+      <h3>💡 Motivation</h3>
+      <p>Stay focused with quotes, study tips, and discipline boosters.</p>
+      <a href="profile.html" style="color:#93c5fd; text-decoration:none;">View Profile →</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

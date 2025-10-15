@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SATPrep | Login & Sign Up</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0a0a29, #003d80);
+      overflow: hidden;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      width: 900px;
+      height: 550px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .welcome {
+      flex: 1;
+      background: linear-gradient(180deg, #2563eb, #1e3a8a);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .welcome h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      max-width: 300px;
+      color: #e0e7ff;
+    }
+
+    .form-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+    }
+
+    form {
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      transition: all 0.6s ease;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      outline: none;
+    }
+
+    input::placeholder { color: #ccc; }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #1e40af, #3b82f6);
+    }
+
+    .toggle-link {
+      color: #93c5fd;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .toggle-link:hover { color: #fff; }
+
+    .hidden { display: none; }
+
+    @media (max-width: 850px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+        width: 95%;
+      }
+      .welcome {
+        padding: 20px;
+      }
+      .form-box {
+        padding: 20px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Side -->
+    <div class="welcome">
+      <h1>Welcome to SATPrep 🎓</h1>
+      <p>Sharpen your Reading, Writing, and Math skills.  
+         Sign in or create an account to begin your journey!</p>
+    </div>
+
+    <!-- Right Side (Form Box) -->
+    <div class="form-box">
+      <!-- LOGIN FORM -->
+      <form id="loginForm">
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <span class="toggle-link" id="showSignup">Don’t have an account? Sign Up</span>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form
+        action="https://formsubmit.co/centemalon777@gmail.com"
+        method="POST"
+        id="signupForm"
+        class="hidden"
+      >
+        <h2>Sign Up</h2>
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
+
+        <input type="hidden" name="_next" value="homepage.html" />
+        <input type="hidden" name="_captcha" value="false" />
+        <span class="toggle-link" id="showLogin">Already have an account? Login</span>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const showSignup = document.getElementById("showSignup");
+    const showLogin = document.getElementById("showLogin");
+
+    showSignup.onclick = () => {
+      loginForm.classList.add("hidden");
+      signupForm.classList.remove("hidden");
+    };
+
+    showLogin.onclick = () => {
+      signupForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    };
+
+    // Redirect on login
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", document.getElementById("loginEmail").value);
+      window.location.href = "homepage.html";
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SATPrep | Profile</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a0a29, #003d80);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .profile-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      width: 340px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #60a5fa;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    input[type="file"] { display: none; }
+
+    label.upload-btn {
+      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    h2 { color: #93c5fd; margin-bottom: 10px; }
+    p { margin: 5px 0; color: #ddd; }
+
+    .quote {
+      margin-top: 20px;
+      font-style: italic;
+      color: #a5b4fc;
+    }
+
+    button {
+      margin-top: 25px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1e40af;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .profile-card { width: 90%; padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <div class="profile-card">
+    <img src="https://via.placeholder.com/100" id="avatar" class="avatar" alt="Profile Image">
+    <form id="uploadForm">
+      <label for="fileInput" class="upload-btn">Upload Image</label>
+      <input type="file" id="fileInput" accept="image/*">
+    </form>
+    <h2 id="userName">Student</h2>
+    <p id="userEmail">example@email.com</p>
+    <p class="quote">“Discipline beats motivation. Show up every day.”</p>
+    <button id="backHome">← Back to Home</button>
+  </div>
+
+  <script>
+    // Get stored user email
+    document.getElementById("userEmail").innerText = localStorage.getItem("userEmail") || "Unknown user";
+
+    // Avatar upload preview
+    const fileInput = document.getElementById("fileInput");
+    const avatar = document.getElementById("avatar");
+    fileInput.addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          avatar.src = ev.target.result;
+          localStorage.setItem("userAvatar", ev.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Keep avatar after refresh
+    const savedAvatar = localStorage.getItem("userAvatar");
+    if (savedAvatar) avatar.src = savedAvatar;
+
+    document.getElementById("backHome").onclick = () => window.location.href = "homepage.html";
+  </script>
+</body>
+</html>
